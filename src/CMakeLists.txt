@@ -10,7 +10,8 @@ set(publicHeaders
         "threepp/controls/DragControls.hpp"
         "threepp/controls/FlyControls.hpp"
         "threepp/controls/OrbitControls.hpp"
-
+		"threepp/controls/TrackballControls.hpp"
+		
         "threepp/core/BufferAttribute.hpp"
         "threepp/core/BufferGeometry.hpp"
         "threepp/core/Clock.hpp"
@@ -248,6 +249,7 @@ set(sources
         "threepp/controls/DragControls.cpp"
         "threepp/controls/FlyControls.cpp"
         "threepp/controls/OrbitControls.cpp"
+		"threepp/controls/TrackballControls.cpp"
 
         "threepp/core/BufferGeometry.cpp"
         "threepp/core/Clock.cpp"
