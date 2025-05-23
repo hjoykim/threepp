@@ -3,7 +3,12 @@
 #define THREEPP_IMGUI_HELPER_HPP
 
 #include <imgui.h>
+#ifdef _MSC_VER
+#include <windows.h>
+#include <imgui_impl_win32.h>
+#else
 #include <imgui_impl_glfw.h>
+#endif
 #include <imgui_impl_opengl3.h>
 
 #include <functional>
@@ -14,7 +19,11 @@ class ImguiContext {
 public:
     explicit ImguiContext(void* window) {
         ImGui::CreateContext();
+#ifdef _MSC_VER
+        ImGui_ImplWin32_InitForOpenGL((HWND) window);
+#else
         ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(window), true);
+#endif
 #if EMSCRIPTEN
         ImGui_ImplOpenGL3_Init("#version 300 es");
 #else
@@ -28,7 +37,11 @@ public:
 
     void render() {
         ImGui_ImplOpenGL3_NewFrame();
+#ifdef _MSC_VER
+        ImGui_ImplWin32_NewFrame();
+#else
         ImGui_ImplGlfw_NewFrame();
+#endif
         ImGui::NewFrame();
 
         onRender();
@@ -39,7 +52,11 @@ public:
 
     virtual ~ImguiContext() {
         ImGui_ImplOpenGL3_Shutdown();
+#ifdef _MSC_VER
+        ImGui_ImplWin32_Shutdown();
+#else
         ImGui_ImplGlfw_Shutdown();
+#endif
         ImGui::DestroyContext();
     }
 

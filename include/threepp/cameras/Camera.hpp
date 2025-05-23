@@ -2,7 +2,10 @@
 
 #ifndef THREEPP_CAMERA_HPP
 #define THREEPP_CAMERA_HPP
-
+#ifdef _WINDOWS
+#define near near_
+#define far far_
+#endif
 #include "threepp/core/Object3D.hpp"
 #include "threepp/math/Matrix4.hpp"
 

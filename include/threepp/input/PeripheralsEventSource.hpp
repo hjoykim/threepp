@@ -31,7 +31,7 @@ namespace threepp {
 
         virtual ~PeripheralsEventSource() = default;
 
-    protected:
+    public:
         enum class KeyAction {
             PRESS,
             RELEASE,
