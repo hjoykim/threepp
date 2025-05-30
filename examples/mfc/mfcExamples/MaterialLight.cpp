@@ -1,8 +1,7 @@
 #pragma once
+#include "MaterialLight.h"
 
-#include "MaterialLightAnimation.h"
-
- void CMaterialLightAnimation::init()
+ void CMaterialLight::init()
 {
     CThreeContainer::init();
     auto planeGeometry = PlaneGeometry::create(60, 20);
@@ -10,7 +9,7 @@
     planeMaterial->color = Color().setHex(0xcccccc);
     plane = Mesh::create(planeGeometry, planeMaterial);
     plane->receiveShadow = true;
-    plane->rotation.x = (float)(-0.5f * math::PI);
+    plane->rotation.x =(float)(-0.5f * math::PI);
 
     plane->position.set(15.0f, 0.0f, 0.0f);
 
@@ -40,7 +39,7 @@
     setUIControls();
 }
 
- void CMaterialLightAnimation::initLighting()
+ void CMaterialLight::initLighting()
 {
     auto spotLight = SpotLight::create(Color(0xffffff));
     spotLight->position.set(-40, 40, -15);
@@ -54,54 +53,24 @@
     auto ambientLight = AmbientLight::create(Color(0x353535));
     scene.add(ambientLight);
 }
-
- void CMaterialLightAnimation::setUIControls()
-{
-    uiPtr = std::make_shared<ImguiFunctionalContext>(hwnd, [&] {
-        ImGui::Begin("MaterialLightAnimation");
-        ImGui::Text("This is Rotaion Speed Control box");
-        ImGui::SliderFloat("RotationSpeed", &rotationSpeed, 0.0f, 0.5f);
-        ImGui::SliderFloat("BouncingSpeed", &bouncingSpeed, 0.0f, 0.5f);
-        ImGui::End();
-        });
-    capture.preventMouseEvent = [] {
-        return ImGui::GetIO().WantCaptureMouse;
-        };
-    this->setIOCapture(&capture);
-}
-
- void CMaterialLightAnimation::render()
-{
-    cube->rotation.x = cube->rotation.x + rotationSpeed;
-    cube->rotation.y = cube->rotation.y + rotationSpeed;
-    cube->rotation.z = cube->rotation.z + rotationSpeed;
-
-    step += bouncingSpeed;
-
-    sphere->position.x = 20 + (10 * cos(step));
-    sphere->position.y = 2 + (10 * abs(sin(step)));
-
-    CThreeContainer::render();
-}
 #ifndef _MSC_VER
  int main() {
-     Canvas canvas("MaterialLightAnimation");
-     CMaterialLightAnimation example(canvas.size().width(), canvas.size().height(), (void*)canvas.windowPtr());
 
-     IOCapture capture;
-     capture.preventMouseEvent = [&] {
-         return ImGui::GetIO().WantCaptureMouse;
-        };
-     
-     canvas.setIOCapture(&capture);        
+     Canvas canvas("MaterialLight");
+     CMaterialLight example(canvas.size().width(), canvas.size().height(), (void*)canvas.windowPtr());
+
+
      example.init();
      example.controls = std::make_shared<OrbitControls>(example.pcamera, canvas);
      canvas.onWindowResize([&](WindowSize size) {
+         example.pcamera.aspect = size.aspect();
+         example.pcamera.updateProjectionMatrix();
+
          example.sizeChanged(size.width(), size.height());
          });
      canvas.animate([&] {
          example.render();
-    });
-}
-#endif
+         });
 
+ }
+#endif

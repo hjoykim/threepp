@@ -9,9 +9,5 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
-#ifdef _MSC_VER
-#define near near_
-#define far far_
-#undef DELETE
-#endif
+
 #endif //PCH_H

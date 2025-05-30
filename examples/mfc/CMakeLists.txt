@@ -19,6 +19,7 @@ file(GLOB resourceFiles CONFIGURE_DEPENDS
 	${sourceFolder}/res/*.rc2
 	${sourceFolder}/res/*.ico
 	${sourceFolder}/res/*.bmp	
+	${sourceFolder}/res/ribbon.mfcribbon-ms	
 )
 set(SOURCES ${sourceFiles})
 set(HEADERS ${headerFiles})
@@ -31,7 +32,7 @@ source_group("Resources" FILES ${resourceFiles})
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${RESOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${sourceFolder} ${threepp_SOURCE_DIR}/src/external/glad)
 target_link_libraries (${PROJECT_NAME} PRIVATE threepp)
-target_link_libraries (${PROJECT_NAME} PRIVATE mfcexample::mfcexample)
+target_link_libraries (${PROJECT_NAME} PRIVATE mfcexample)
 target_link_libraries (${PROJECT_NAME} PRIVATE imgui::imgui)
 target_compile_definitions(${PROJECT_NAME} PRIVATE NOMINMAX)
 target_precompile_headers(${PROJECT_NAME} PRIVATE ${sourceFolder}/pch.h)

@@ -7,7 +7,7 @@ class CThreeContainer : public PeripheralsEventSource{
 
 public:
 	void* hwnd; // 
-	bool initialized = false;
+	bool Initialized = false;
 	IOCapture capture;
 	std::shared_ptr<ImguiFunctionalContext> uiPtr;
 	
@@ -17,13 +17,14 @@ public:
 	PerspectiveCamera pcamera;
 	OrthographicCamera ocamera;
 	std::shared_ptr<OrbitControls> controls;
-	GLRenderer renderer{ WindowSize{800,600} };
+	std::shared_ptr<GLRenderer> renderer = nullptr;
 	int width;
 	int height;
 	bool isPerspective;
-
+	CThreeContainer(){};
 	CThreeContainer(int x,int y, void* hwnd=nullptr);
 	~CThreeContainer() = default;	
+	void setHwnd(int x, int y, void* hwnd);
 	virtual void initCamera();
 	virtual void initLighting();
 	virtual void initControls();
