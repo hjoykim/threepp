@@ -1,4 +1,4 @@
-if (THREEPP_MFC)
+
 project(mfcapp)
 set(CMAKE_MFC_FLAG 2)
 include(CMakeDependentOption)
@@ -52,4 +52,3 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	LINK_FLAGS "/SUBSYSTEM:WINDOWS /NODEFAULTLIB:LIBCMTD"
 )
 
-endif()

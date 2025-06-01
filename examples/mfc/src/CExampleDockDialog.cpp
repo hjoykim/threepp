@@ -1,15 +1,9 @@
-﻿// CExampleDockDialog.cpp: 구현 파일
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "ThreeppMDI.h"
 #include "afxdialogex.h"
 #include "CExampleDockDialog.h"
 #include <LoadExamples.h>
 #include <MainFrm.h>
-
-
-// CExampleDockDialog 대화 상자
 
 IMPLEMENT_DYNAMIC(CExampleDockDialog, CPaneDialog)
 
@@ -58,13 +52,28 @@ void CExampleDockDialog::OnSize(UINT nType, int cx, int cy)
 
 void CExampleDockDialog::OnLbnSelchangeExampleList()
 {
-	int sel = m_list.GetCurSel();
-	if (sel < 0 || sel >= exampleList.GetSize()) return;
-	auto example = exampleList.GetAt(sel);
-	CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
-	if (pMainFrame) {
-		CString strText;
-		m_list.GetText(sel, strText);
-		pMainFrame->CreateChildExampleWindow(strText,example);
-	}
+    // 1. 현재 선택된 항목 유효성 검사
+    int sel = m_list.GetCurSel();
+    if (sel < 0 || sel >= exampleList.GetSize())
+        return;
+
+    CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
+    if (!pMainFrame)
+        return;
+
+    try {
+        auto example = exampleList.GetAt(sel);
+        if (!example)  
+            return;
+        
+        CString strText;
+        m_list.GetText(sel, strText);
+        if (strText.IsEmpty())
+            return;
+        
+        pMainFrame->CreateChildExampleWindow(strText, example);
+    }
+    catch (...) {
+        AfxMessageBox(_T("Error occurred while creating the example window."));
+    }
 }

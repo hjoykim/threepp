@@ -22,4 +22,6 @@ add_subdirectory(shaders)
 add_subdirectory(textures)
 
 add_subdirectory(projects)
+if (THREEPP_MFC_EXAMPLES)
 add_subdirectory(mfc)
+endif()

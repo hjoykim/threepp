@@ -38,9 +38,6 @@
 
 #include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원
 
-#define near near_
-#define far far_
-#undef DELETE
 
 
 

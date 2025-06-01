@@ -41,6 +41,11 @@ CChildFrame::CChildFrame() noexcept
 
 CChildFrame::~CChildFrame()
 {
+	// 뷰가 아직 윈도우를 가지고 있다면
+	if (m_wndView.GetSafeHwnd())
+	{
+		m_wndView.DestroyWindow();
+	}
 }
 
 

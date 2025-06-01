@@ -10,7 +10,7 @@ option(THREEPP_BUILD_TESTS "Build test suite" ON)
 option(THREEPP_WITH_SVG "Build with SVGLoader" ON)
 option(THREEPP_WITH_AUDIO "Build with Audio" ON)
 option(THREEPP_TREAT_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
-option(THREEPP_MFC "Build MFC libraries" ON)
+option(THREEPP_MFC_EXAMPLES "Build MFC examples" ON)
 # Force THREEPP_WITH_GLFW ON when targeting Emscripten
 cmake_dependent_option(THREEPP_WITH_GLFW "Build with GLFW frontend" ON "NOT DEFINED EMSCRIPTEN" ON)
 # Force THREEPP_USE_EXTERNAL_GLFW OFF if NOT THREEPP_WITH_GLFW
