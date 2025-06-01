@@ -13,7 +13,10 @@ class CMainFrame : public CMDIFrameWndEx
 	DECLARE_DYNAMIC(CMainFrame)
 private :
 	std::vector<class CChildFrame*> m_exampleChildWindows;
+	void CleanupNullWindows();
+
 public:
+
 	CMainFrame() noexcept;
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual ~CMainFrame();
