@@ -31,7 +31,8 @@ namespace threepp {
 
         virtual ~PeripheralsEventSource() = default;
 
-    public:
+    //protected: 
+    public: // permit MFC CWnd class and other class using this event
         enum class KeyAction {
             PRESS,
             RELEASE,
