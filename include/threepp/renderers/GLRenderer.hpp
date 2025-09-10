@@ -12,7 +12,7 @@
 
 #include "threepp/canvas/Canvas.hpp"
 #include "threepp/core/misc.hpp"
-
+#include "threepp/renderers/IGLRenderer.hpp"
 #include "threepp/renderers/gl/GLInfo.hpp"
 #include "threepp/renderers/gl/GLShadowMap.hpp"
 #include "threepp/renderers/gl/GLState.hpp"
@@ -31,7 +31,7 @@ namespace threepp {
     class Texture;
     class GLRenderTarget;
 
-    class GLRenderer {
+    class GLRenderer : public IGLRenderer {
 
     public:
         struct Parameters {
@@ -43,35 +43,35 @@ namespace threepp {
 
         // clearing
 
-        bool autoClear = true;
-        bool autoClearColor = true;
-        bool autoClearDepth = true;
-        bool autoClearStencil = true;
+        //bool autoClear = true;
+        //bool autoClearColor = true;
+        //bool autoClearDepth = true;
+        //bool autoClearStencil = true;
 
         // scene graph
 
-        bool sortObjects = true;
+        //bool sortObjects = true;
 
         // user-defined clipping
 
-        std::vector<Plane> clippingPlanes;
-        bool localClippingEnabled = false;
+        //std::vector<Plane> clippingPlanes;
+        //bool localClippingEnabled = false;
 
         // physically based shading
 
-        float gammaFactor = 2.0f;// for backwards compatibility
-        Encoding outputEncoding{Encoding::Linear};
+        //float gammaFactor = 2.0f;// for backwards compatibility
+        //Encoding outputEncoding{Encoding::Linear};
 
         // physical lights
 
-        bool physicallyCorrectLights = false;
+        //bool physicallyCorrectLights = false;
 
         // tone mapping
 
-        ToneMapping toneMapping{ToneMapping::None};
-        float toneMappingExposure = 1.0f;
+        //ToneMapping toneMapping{ToneMapping::None};
+        //float toneMappingExposure = 1.0f;
 
-        bool checkShaderErrors = false;
+        //bool checkShaderErrors = false;
 
         explicit GLRenderer(std::pair<int, int> size = {}, const Parameters& parameters = {});
 
@@ -82,9 +82,9 @@ namespace threepp {
 
         const gl::GLInfo& info();
 
-        gl::GLShadowMap& shadowMap();
+        gl::GLShadowMap& shadowMap() override;
 
-        [[nodiscard]] const gl::GLShadowMap& shadowMap() const;
+        [[nodiscard]] const gl::GLShadowMap& shadowMap() const override;
 
         gl::GLState& state();
 
@@ -132,25 +132,25 @@ namespace threepp {
 
         void setClearAlpha(float clearAlpha);
 
-        void clear(bool color = true, bool depth = true, bool stencil = true);
+        void clear(bool color = true, bool depth = true, bool stencil = true) override;
 
         void clearColor();
         void clearDepth();
         void clearStencil();
 
-        void dispose();
+        void dispose() override;
 
-        void render(Object3D& scene, Camera& camera);
+        void render(Object3D& scene, Camera& camera) override;
 
-        void renderBufferDirect(Camera* camera, Scene* scene, BufferGeometry* geometry, Material* material, Object3D* object, std::optional<GeometryGroup> group);
+        void renderBufferDirect(Camera* camera, Scene* scene, BufferGeometry* geometry, Material* material, Object3D* object, std::optional<GeometryGroup> group) override;
 
-        [[nodiscard]] int getActiveCubeFace() const;
+        [[nodiscard]] int getActiveCubeFace() const override;
 
-        [[nodiscard]] int getActiveMipmapLevel() const;
+        [[nodiscard]] int getActiveMipmapLevel() const override;
 
-        GLRenderTarget* getRenderTarget();
+        GLRenderTarget* getRenderTarget() override;
 
-        void setRenderTarget(GLRenderTarget* renderTarget, int activeCubeFace = 0, int activeMipmapLevel = 0);
+        void setRenderTarget(GLRenderTarget* renderTarget, int activeCubeFace = 0, int activeMipmapLevel = 0) override;
 
         void copyFramebufferToTexture(const Vector2& position, Texture& texture, int level = 0);
 

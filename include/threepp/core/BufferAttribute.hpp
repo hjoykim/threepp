@@ -424,6 +424,8 @@ namespace threepp {
 
     typedef TypedBufferAttribute<unsigned int> IntBufferAttribute;
     typedef TypedBufferAttribute<float> FloatBufferAttribute;
+    typedef TypedBufferAttribute<std::uint8_t> Uint8BufferAttribute;
+    typedef TypedBufferAttribute<std::uint16_t> Uint16BufferAttribute;
 
 
 }// namespace threepp

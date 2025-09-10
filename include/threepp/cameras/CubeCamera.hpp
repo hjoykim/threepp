@@ -61,7 +61,7 @@ namespace threepp {
             return "CubeCamera";
         }
 
-        void update(GLRenderer& renderer, Object3D& scene) {
+        void update(IGLRenderer& renderer, Object3D& scene) {
 
             if (!this->parent) this->updateMatrixWorld();
 
