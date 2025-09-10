@@ -9,7 +9,7 @@
 #include "threepp/objects/Mesh.hpp"
 #include "threepp/renderers/GLRenderTarget.hpp"
 #include "threepp/textures/CubeTexture.hpp"
-
+#include "threepp/renderers/IGLRenderer.hpp"
 namespace threepp {
 
     class GLCubeRenderTarget: public GLRenderTarget {
@@ -32,7 +32,7 @@ namespace threepp {
             this->texture->minFilter = options.minFilter.value_or(Filter::Linear);
         }
 
-        void fromEquirectangularTexture(GLRenderer& renderer, Texture& texture) {
+        void fromEquirectangularTexture(IGLRenderer& renderer, Texture& texture) {
 
             this->texture->type = texture.type;
             this->texture->format = Format::RGBA;// see #18859

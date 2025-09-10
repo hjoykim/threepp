@@ -9,11 +9,10 @@
 #include <optional>
 #include <string>
 #include <unordered_map>
-
+#include "threepp/renderers/IGLRenderer.hpp"
 namespace threepp {
 
     class Scene;
-    class GLRenderer;
 
     namespace gl {
 
@@ -128,7 +127,7 @@ namespace threepp {
             UniformMap* uniforms = nullptr;
 
             ProgramParameters(
-                    const GLRenderer& renderer,
+                    const IGLRenderer& renderer,
                     const GLClipping& clipping,
                     const GLLights::LightState& lights,
                     size_t numShadows,

@@ -13,7 +13,7 @@
 #include "threepp/materials/Material.hpp"
 #include "threepp/scenes/Scene.hpp"
 #include "threepp/textures/Texture.hpp"
-
+#include "threepp/renderers/IGLRenderer.hpp"
 #include <map>
 #include <memory>
 #include <optional>
@@ -45,7 +45,7 @@ namespace threepp {
             GLPrograms(GLBindingStates& bindingStates, GLClipping& clipping);
 
             static ProgramParameters getParameters(
-                    const GLRenderer& renderer,
+                    IGLRenderer& renderer,
                     const GLClipping& clipping,
                     Material* material,
                     const GLLights::LightState& lights,
@@ -53,11 +53,11 @@ namespace threepp {
                     Scene* scene,
                     Object3D* object);
 
-            static std::string getProgramCacheKey(const GLRenderer& renderer, const ProgramParameters& parameters);
+            static std::string getProgramCacheKey(const IGLRenderer& renderer, const ProgramParameters& parameters);
 
             static UniformMap* getUniforms(Material& material);
 
-            GLProgram* acquireProgram(const GLRenderer& renderer, const ProgramParameters& parameters, const std::string& cacheKey);
+            GLProgram* acquireProgram(const IGLRenderer& renderer, const ProgramParameters& parameters, const std::string& cacheKey);
 
             void releaseProgram(GLProgram* program);
         };

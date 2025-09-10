@@ -42,7 +42,7 @@ GLPrograms::GLPrograms(GLBindingStates& bindingStates, GLClipping& clipping)
 
 
 ProgramParameters GLPrograms::getParameters(
-        const GLRenderer& renderer,
+        IGLRenderer& renderer,
         const GLClipping& clipping,
         Material* material,
         const GLLights::LightState& lights,
@@ -53,7 +53,7 @@ ProgramParameters GLPrograms::getParameters(
     return {renderer, clipping, lights, numShadows, object, scene, material, shaderIDs};
 }
 
-std::string GLPrograms::getProgramCacheKey(const GLRenderer& renderer, const ProgramParameters& parameters) {
+std::string GLPrograms::getProgramCacheKey(const IGLRenderer& renderer, const ProgramParameters& parameters) {
 
     std::vector<std::string> array;
 
@@ -110,7 +110,7 @@ UniformMap* GLPrograms::getUniforms(Material& material) {
     return nullptr;
 }
 
-GLProgram* GLPrograms::acquireProgram(const GLRenderer& renderer, const ProgramParameters& parameters, const std::string& cacheKey) {
+GLProgram* GLPrograms::acquireProgram(const IGLRenderer& renderer, const ProgramParameters& parameters, const std::string& cacheKey) {
 
     GLProgram* program = nullptr;
 

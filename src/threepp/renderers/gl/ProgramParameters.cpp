@@ -26,7 +26,7 @@ namespace {
 }// namespace
 
 ProgramParameters::ProgramParameters(
-        const GLRenderer& renderer,
+        const IGLRenderer& renderer,
         const GLClipping& clipping,
         const GLLights::LightState& lights,
         size_t numShadows,
@@ -179,7 +179,7 @@ ProgramParameters::ProgramParameters(
     numClipIntersection = clipping.numIntersection;
 
     dithering = material->dithering;
-
+        
     shadowMapEnabled = renderer.shadowMap().enabled && numShadows > 0;
     shadowMapType = renderer.shadowMap().type;
 

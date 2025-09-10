@@ -72,7 +72,7 @@ struct GLShadowMap::Impl {
         fullScreenMesh = Mesh::create(fullScreenTri, shadowMaterialVertical);
     }
 
-    void VSMPass(GLRenderer& _renderer, LightShadow* shadow, Camera* camera) {
+    void VSMPass(IGLRenderer& _renderer, LightShadow* shadow, Camera* camera) {
         const auto& geometry = _objects.update(fullScreenMesh.get());
 
         // vertical pass
@@ -125,7 +125,7 @@ struct GLShadowMap::Impl {
         return _distanceMaterials[index].get();
     }
 
-    Material* getDepthMaterial(GLRenderer& _renderer, Object3D* /*object*/, BufferGeometry* /*geometry*/, Material* material, Light* light, float shadowCameraNear, float shadowCameraFar) {
+    Material* getDepthMaterial(IGLRenderer& _renderer, Object3D* /*object*/, BufferGeometry* /*geometry*/, Material* material, Light* light, float shadowCameraNear, float shadowCameraFar) {
 
         Material* result;
 
@@ -197,7 +197,7 @@ struct GLShadowMap::Impl {
         return result;
     }
 
-    void renderObject(GLRenderer& _renderer, Object3D* object, Camera* camera, Camera* shadowCamera, Light* light) {
+    void renderObject(IGLRenderer& _renderer, Object3D* object, Camera* camera, Camera* shadowCamera, Light* light) {
 
         if (!object->visible) return;
 
@@ -245,7 +245,7 @@ struct GLShadowMap::Impl {
         }
     }
 
-    void render(GLRenderer& _renderer, const std::vector<Light*>& lights, Object3D* scene, Camera* camera) {
+    void render(IGLRenderer& _renderer, const std::vector<Light*>& lights, Object3D* scene, Camera* camera) {
 
         if (!scope->enabled) return;
         if (!scope->autoUpdate && !scope->needsUpdate) return;
@@ -411,7 +411,7 @@ GLShadowMap::GLShadowMap(GLObjects& objects)
     : type(ShadowMap::PFC), pimpl_(std::make_unique<Impl>(this, objects)) {}
 
 
-void GLShadowMap::render(GLRenderer& renderer, const std::vector<Light*>& lights, Object3D* scene, Camera* camera) {
+void GLShadowMap::render(IGLRenderer& renderer, const std::vector<Light*>& lights, Object3D* scene, Camera* camera) {
 
     pimpl_->render(renderer, lights, scene, camera);
 }

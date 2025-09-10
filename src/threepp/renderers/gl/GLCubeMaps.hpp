@@ -14,14 +14,14 @@ namespace threepp {
         class GLCubeMaps {
 
         public:
-            explicit GLCubeMaps(GLRenderer& renderer);
+            explicit GLCubeMaps(IGLRenderer& renderer);
 
             void get(Texture* texture);
 
             void dispose();
 
         private:
-            GLRenderer& renderer;
+            IGLRenderer& renderer;
             std::unordered_map<Texture*, std::unique_ptr<GLCubeRenderTarget>> cubemaps;
         };
 

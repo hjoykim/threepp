@@ -22,7 +22,7 @@ namespace {
 
 }// namespace
 
-GLCubeMaps::GLCubeMaps(GLRenderer& renderer)
+GLCubeMaps::GLCubeMaps(IGLRenderer& renderer)
     : renderer(renderer) {}
 
 void GLCubeMaps::get(Texture* texture) {

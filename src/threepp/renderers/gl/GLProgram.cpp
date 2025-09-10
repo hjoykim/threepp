@@ -11,6 +11,7 @@
 #include "threepp/utils/StringUtils.hpp"
 
 #include <cmath>
+#include <fstream>
 #include <iostream>
 #include <list>
 #include <vector>
@@ -329,7 +330,7 @@ namespace {
 }// namespace
 
 
-GLProgram::GLProgram(const GLRenderer* renderer, std::string cacheKey, const ProgramParameters* parameters, GLBindingStates* bindingStates)
+GLProgram::GLProgram(const IGLRenderer* renderer, std::string cacheKey, const ProgramParameters* parameters, GLBindingStates* bindingStates)
     : cacheKey(std::move(cacheKey)), bindingStates(bindingStates) {
 
     auto& defines = parameters->defines;
@@ -696,6 +697,18 @@ GLProgram::GLProgram(const GLRenderer* renderer, std::string cacheKey, const Pro
     std::string vertexGlsl = prefixVertex + vertexShader;
     std::string fragmentGlsl = prefixFragment + fragmentShader;
 
+    // Save shaders to txt files
+    //std::ofstream vertexFile(parameters->shaderName +"_vertex_shader.txt");
+    //if (vertexFile.is_open()) {
+    //    vertexFile << vertexGlsl;
+    //    vertexFile.close();
+    //}
+    //
+    //std::ofstream fragmentFile(parameters->shaderName+"_fragment_shader.txt");
+    //if (fragmentFile.is_open()) {
+    //    fragmentFile << fragmentGlsl;
+    //    fragmentFile.close();
+    //}
 
     const auto glVertexShader = createShader(GL_VERTEX_SHADER, vertexGlsl.c_str());
     const auto glFragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentGlsl.c_str());

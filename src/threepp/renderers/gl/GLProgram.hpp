@@ -11,7 +11,7 @@
 
 namespace threepp {
 
-    class GLRenderer;
+    class IGLRenderer;
 
     namespace gl {
 
@@ -25,7 +25,7 @@ namespace threepp {
             int usedTimes = 1;
             int program = -1;
 
-            GLProgram(const GLRenderer* renderer, std::string cacheKey, const ProgramParameters* parameters, GLBindingStates* bindingStates);
+            GLProgram(const IGLRenderer* renderer, std::string cacheKey, const ProgramParameters* parameters, GLBindingStates* bindingStates);
 
             GLProgram(const GLProgram&) = delete;
             GLProgram(GLProgram&&) = delete;

@@ -9,7 +9,7 @@
 using namespace threepp;
 using namespace threepp::gl;
 
-GLBackground::GLBackground(GLRenderer& renderer, GLCubeMaps& cubemaps, GLState& state, GLObjects& objects, bool premultipliedAlpha)
+GLBackground::GLBackground(IGLRenderer& renderer, GLCubeMaps& cubemaps, GLState& state, GLObjects& objects, bool premultipliedAlpha)
     : renderer(renderer), cubemaps(cubemaps), state(state), objects(objects), premultipliedAlpha(premultipliedAlpha) {}
 
 void GLBackground::render(GLRenderList& renderList, Object3D* scene) {

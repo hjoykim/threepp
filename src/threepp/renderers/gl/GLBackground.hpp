@@ -10,7 +10,7 @@
 namespace threepp {
 
     class Mesh;
-    class GLRenderer;
+    class IGLRenderer;
 
     namespace gl {
 
@@ -21,7 +21,7 @@ namespace threepp {
 
         struct GLBackground {
 
-            GLBackground(GLRenderer& renderer, GLCubeMaps& cubemaps, GLState& state, GLObjects& objects, bool premultipliedAlpha);
+            GLBackground(IGLRenderer& renderer, GLCubeMaps& cubemaps, GLState& state, GLObjects& objects, bool premultipliedAlpha);
 
             void render(GLRenderList& renderList, Object3D* scene);
 
@@ -35,7 +35,7 @@ namespace threepp {
 
 
         private:
-            GLRenderer& renderer;
+            IGLRenderer& renderer;
             GLCubeMaps& cubemaps;
             GLState& state;
             GLObjects& objects;
