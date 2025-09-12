@@ -2,7 +2,7 @@
 #include "threepp/math/Vector4.hpp"
 
 #include "threepp/math/Matrix4.hpp"
-
+#include "threepp/core/InterleavedBufferAttribute.hpp"
 #include <cmath>
 #include <string>
 
@@ -192,6 +192,15 @@ Vector4& Vector4::negate() {
     return *this;
 }
 
+Vector4& threepp::Vector4::lerp(Vector4& v, float alpha) {
+    x += (v.x - x) * alpha;
+    y += (v.y - y) * alpha;
+    z += (v.z - z) * alpha;
+    w += (v.w - w) * alpha;
+
+    return *this;
+}
+
 float Vector4::dot(const Vector4& v) const {
 
     return this->x * v.x + this->y * v.y + this->z * v.z + this->w * v.w;
@@ -241,4 +250,13 @@ bool Vector4::operator==(const Vector4& other) const {
 bool Vector4::operator!=(const Vector4& other) const {
 
     return !equals(other);
+}
+
+Vector4& threepp::Vector4::fromBufferAttribute(const InterleavedBufferAttribute& attribute, int index) {
+    x = attribute.getX(static_cast<size_t>(index));
+    y = attribute.getY(static_cast<size_t>(index));
+    z = attribute.getZ(static_cast<size_t>(index));
+    w = attribute.getW(static_cast<size_t>(index));
+
+    return *this;
 }

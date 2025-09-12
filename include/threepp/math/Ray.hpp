@@ -12,6 +12,7 @@ namespace threepp {
     class Sphere;
     class Plane;
     class Box3;
+    class Vector4;
 
     class Ray {
 
@@ -26,6 +27,8 @@ namespace threepp {
         Ray& copy(const Ray& ray);
 
         Vector3& at(float t, Vector3& target) const;
+
+        Vector3& at(float t, Vector4& target) const;
 
         Ray& lookAt(const Vector3& v);
 

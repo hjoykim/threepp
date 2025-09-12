@@ -17,7 +17,9 @@ cmake_dependent_option(THREEPP_WITH_GLFW "Build with GLFW frontend" ON "NOT DEFI
 cmake_dependent_option(THREEPP_USE_EXTERNAL_GLFW "Use externally supplied GLFW" OFF "THREEPP_WITH_GLFW" OFF)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-
+if(MSVC)
+	add_compile_definitions(WIN32_LEAN_AND_MEAN NOMINMAX)
+endif()
 # ==============================================================================
 # Global internal configuration
 # ==============================================================================

@@ -27,7 +27,7 @@ endfunction()
 add_mfc_example(NAME FirstScene SOURCES "FirstSceneExample.h" "FirstSceneExample.cpp")
 add_mfc_example(NAME MaterialLight SOURCES "MaterialLight.h" "MaterialLight.cpp")
 add_mfc_example(NAME MaterialLightAnimation SOURCES "MaterialLightAnimation.h" "MaterialLightAnimation.cpp")
-
+add_mfc_example(NAME FatLine SOURCES "FatLineExample.h" "FatLineExample.cpp")
 
 set(headerFiles
     "ThreeContainer.h"

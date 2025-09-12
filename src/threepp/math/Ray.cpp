@@ -4,7 +4,7 @@
 #include "threepp/math/Box3.hpp"
 #include "threepp/math/Plane.hpp"
 #include "threepp/math/Sphere.hpp"
-
+#include "threepp/math/Vector4.hpp"
 #include <algorithm>
 #include <cmath>
 
@@ -45,6 +45,13 @@ Ray& Ray::copy(const Ray& ray) {
 Vector3& Ray::at(float t, Vector3& target) const {
 
     return target.copy(this->direction).multiplyScalar(t).add(this->origin);
+}
+
+Vector3& Ray::at(float t, Vector4& target) const {
+    Vector3 result;
+    result.copy(this->direction).multiplyScalar(t).add(this->origin);
+    target.set(result.x, result.y, result.z, 0);
+    return result;
 }
 
 Ray& Ray::lookAt(const Vector3& v) {

@@ -8,7 +8,7 @@
 #include "threepp/math/Spherical.hpp"
 
 #include "threepp/cameras/Camera.hpp"
-
+#include "threepp/core/InterleavedBufferAttribute.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
@@ -541,6 +541,13 @@ Vector3& Vector3::setFromMatrixColumn(const Matrix4& m, unsigned int index) {
 Vector3& Vector3::setFromMatrix3Column(const Matrix3& m, unsigned int index) {
 
     return this->fromArray(m.elements, index * 3);
+}
+
+Vector3& threepp::Vector3::fromBufferAttribute(const InterleavedBufferAttribute& attribute, unsigned int index) {
+    this->x = attribute.getX(index);
+    this->y = attribute.getY(index);
+    this->z = attribute.getZ(index);
+    return *this;
 }
 
 Vector3 Vector3::clone() const {

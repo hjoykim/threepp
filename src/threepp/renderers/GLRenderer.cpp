@@ -30,7 +30,7 @@
 #include "threepp/objects/Points.hpp"
 #include "threepp/objects/SkinnedMesh.hpp"
 #include "threepp/objects/Sprite.hpp"
-
+#include "threepp/core/InstancedBufferGeometry.hpp"
 #include "threepp/utils/ImageUtils.hpp"
 
 #ifndef EMSCRIPTEN
@@ -437,13 +437,14 @@ struct GLRenderer::Impl {
 
             renderer->renderInstances(drawStart, drawCount, im->count());
 
-        } /*else if (auto g = dynamic_cast<InstancedBufferGeometry*>(geometry)) {
+        } 
+        else if (auto g = dynamic_cast<InstancedBufferGeometry*>(geometry)) {
 
-            const auto instanceCount = std::min(g->instanceCount, g->_maxInstanceCount);
+            const auto instanceCount = std::min(g->instanceCount, g->maxInstanceCount.value());
 
             renderer->renderInstances(drawStart, drawCount, instanceCount);
 
-        } */
+        } 
         else {
 
             renderer->render(drawStart, drawCount);

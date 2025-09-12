@@ -18,10 +18,12 @@ set(publicHeaders
         "threepp/core/Clock.hpp"
         "threepp/core/EventDispatcher.hpp"
         "threepp/core/Face3.hpp"
+		"threepp/core/InstancedBufferAttribute.hpp"
+		"threepp/core/InstancedBufferGeometry.hpp"
+		"threepp/core/InterleavedBuffer.hpp"
+        "threepp/core/InterleavedBufferAttribute.hpp"
         "threepp/core/Layers.hpp"
         "threepp/core/misc.hpp"
-        "threepp/core/InterleavedBuffer.hpp"
-        "threepp/core/InterleavedBufferAttribute.hpp"
         "threepp/core/Object3D.hpp"
         "threepp/core/Raycaster.hpp"
         "threepp/core/Shader.hpp"
@@ -93,7 +95,13 @@ set(publicHeaders
         "threepp/helpers/PolarGridHelper.hpp"
         "threepp/helpers/SkeletonHelper.hpp"
         "threepp/helpers/SpotLightHelper.hpp"
-
+		
+		"threepp/lines/Line2.hpp"
+		"threepp/lines/LineGeometry.hpp"
+		"threepp/lines/LineMaterial.hpp"
+		"threepp/lines/LineSegments2.hpp"
+		"threepp/lines/LineSegmentsGeometry.hpp"
+		
         "threepp/loaders/loaders.hpp"
         "threepp/loaders/AssimpLoader.hpp"
         "threepp/loaders/CubeTextureLoader.hpp"
@@ -105,6 +113,8 @@ set(publicHeaders
         "threepp/loaders/TextureLoader.hpp"
         "threepp/loaders/URDFLoader.hpp"
 
+		"threepp/materials/LineBasicMaterial.hpp"
+		"threepp/materials/LineDashedMaterial.hpp"
         "threepp/materials/Material.hpp"
         "threepp/materials/MeshBasicMaterial.hpp"
         "threepp/materials/MeshDepthMaterial.hpp"
@@ -173,6 +183,7 @@ set(publicHeaders
         "threepp/textures/Texture.hpp"
 
         "threepp/utils/BufferGeometryUtils.hpp"
+		"threepp/utils/GeometryUtils.hpp"
         "threepp/utils/ImageUtils.hpp"
         "threepp/utils/StringUtils.hpp"
         "threepp/utils/TaskManager.hpp"
@@ -254,6 +265,7 @@ set(sources
         "threepp/core/BufferGeometry.cpp"
         "threepp/core/Clock.cpp"
         "threepp/core/EventDispatcher.cpp"
+		"threepp/core/InstancedBufferGeometry.cpp"
         "threepp/core/Layers.cpp"
         "threepp/core/Object3D.cpp"
         "threepp/core/Raycaster.cpp"
@@ -314,6 +326,12 @@ set(sources
 
         "threepp/input/PeripheralsEventSource.cpp"
 
+		"threepp/lines/Line2.cpp"
+		"threepp/lines/LineGeometry.cpp"
+		"threepp/lines/LineMaterial.cpp"
+		"threepp/lines/LineSegments2.cpp"
+		"threepp/lines/LineSegmentsGeometry.cpp"
+		
         "threepp/loaders/FontLoader.cpp"
         "threepp/loaders/ImageLoader.cpp"
         "threepp/loaders/MTLLoader.cpp"
@@ -323,6 +341,7 @@ set(sources
         "threepp/loaders/URDFLoader.cpp"
 
         "threepp/materials/LineBasicMaterial.cpp"
+		"threepp/materials/LineDashedMaterial.cpp"
         "threepp/materials/Material.cpp"
         "threepp/materials/MeshBasicMaterial.cpp"
         "threepp/materials/MeshLambertMaterial.cpp"
@@ -393,6 +412,7 @@ set(sources
         "threepp/textures/DataTexture3D.cpp"
 
         "threepp/utils/BufferGeometryUtils.cpp"
+		"threepp/utils/GeometryUtils.cpp"
         "threepp/utils/StringUtils.cpp"
         "threepp/utils/TaskManager.cpp"
 

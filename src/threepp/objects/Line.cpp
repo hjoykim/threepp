@@ -59,7 +59,7 @@ void Line::computeLineDistances() {
             positionAttribute->setFromBufferAttribute(_start, i - 1);
             positionAttribute->setFromBufferAttribute(_end, i);
 
-            lineDistances[i] = lineDistances[i - 1];
+            lineDistances.push_back(lineDistances[i - 1]);
             lineDistances[i] += _start.distanceTo(_end);
         }
 

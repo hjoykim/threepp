@@ -5,6 +5,7 @@
 #include "threepp/materials/Material.hpp"
 
 #include "threepp/materials/LineBasicMaterial.hpp"
+#include "threepp/materials/LineDashedMaterial.hpp"
 #include "threepp/materials/MeshBasicMaterial.hpp"
 #include "threepp/materials/MeshLambertMaterial.hpp"
 #include "threepp/materials/MeshNormalMaterial.hpp"
@@ -13,5 +14,5 @@
 #include "threepp/materials/PointsMaterial.hpp"
 #include "threepp/materials/ShadowMaterial.hpp"
 #include "threepp/materials/SpriteMaterial.hpp"
-
+#include "threepp/lines/LineMaterial.hpp"
 #endif//THREEPP_MATERIALS_HPP

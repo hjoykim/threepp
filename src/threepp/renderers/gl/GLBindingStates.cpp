@@ -6,6 +6,9 @@
 #include "threepp/core/InterleavedBufferAttribute.hpp"
 #include "threepp/materials/materials.hpp"
 #include "threepp/objects/InstancedMesh.hpp"
+#include "threepp/core/InstancedInterleavedBuffer.hpp"
+#include "threepp/core/InstancedBufferGeometry.hpp"
+#include "threepp/core/InstancedBufferAttribute.hpp"
 
 #if EMSCRIPTEN
 #include <GLES3/gl32.h>
@@ -138,6 +141,11 @@ struct GLBindingStates::Impl {
 
             if (cachedAttribute != geometryAttribute.get()) return true;
 
+            if(auto interleavedAttr = dynamic_cast<InterleavedBufferAttribute*>(geometryAttribute.get())) {
+                auto cachedInterleavedAttr = dynamic_cast<InterleavedBufferAttribute*>(cachedAttribute);
+                if (!cachedInterleavedAttr) return true;
+                if (interleavedAttr->data != cachedInterleavedAttr->data) return true;
+            }
             //          if (cachedAttribute.data != geometryAttribute.data) return true;
 
             ++attributesNum;
@@ -266,15 +274,16 @@ struct GLBindingStates::Impl {
                         const auto stride = data->stride();
                         const auto offset = attr->offset;
 
-                        if (false /*data && data.isInstancedInterleavedBuffer*/) {
+                        if (auto instancedBuffer = dynamic_cast<InstancedInterleavedBuffer*>(data.get())) {
 
-                            //                        enableAttributeAndDivisor( programAttribute, data.meshPerAttribute );
-                            //
-                            //                        if ( geometry._maxInstanceCount === undefined ) {
-                            //
-                            //                            geometry._maxInstanceCount = data.meshPerAttribute * data.count;
-                            //
-                            //                        }
+                            enableAttributeAndDivisor( programAttribute, instancedBuffer->meshPerAttribute);
+                            
+                            if (auto instancedGeometry = dynamic_cast<InstancedBufferGeometry*>(geometry)) {
+                                if(!instancedGeometry->maxInstanceCount) {
+                                    int count = instancedBuffer->meshPerAttribute * instancedBuffer->count();
+                                    instancedGeometry->maxInstanceCount = count;
+                                }
+                            }
 
                         } else {
 
@@ -286,9 +295,13 @@ struct GLBindingStates::Impl {
 
                     } else {
 
-                        if (false /*geometryAttribute.isInstancedBufferAttribute*/) {
-
-                            // TODO
+                        if (auto instancedAttribute = dynamic_cast<InstancedBufferAttribute*>(geometryAttribute.get())) {
+                            enableAttributeAndDivisor(programAttribute, instancedAttribute->meshPerAttribute);
+                            if(auto instancedGeometry = dynamic_cast<InstancedBufferGeometry*>(geometry)){
+                                if(!instancedGeometry->maxInstanceCount){
+                                    instancedGeometry->maxInstanceCount = instancedAttribute->meshPerAttribute * instancedAttribute->count();
+                                }
+                            }
 
                         } else {
 

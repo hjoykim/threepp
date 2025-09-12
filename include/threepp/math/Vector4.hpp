@@ -9,7 +9,7 @@ namespace threepp {
 
     class Matrix3;
     class Matrix4;
-
+    class InterleavedBufferAttribute;
     class Vector4 {
 
     public:
@@ -60,6 +60,8 @@ namespace threepp {
 
         Vector4& negate();
 
+        Vector4& lerp(Vector4& v, float alpha);
+
         [[nodiscard]] float dot(const Vector4& v) const;
 
         [[nodiscard]] float lengthSq() const;
@@ -99,7 +101,8 @@ namespace threepp {
             array[offset + 2] = this->z;
             array[offset + 3] = this->w;
         }
-
+        Vector4& fromBufferAttribute(const InterleavedBufferAttribute& attribute, int index);
+        
         friend std::ostream& operator<<(std::ostream& os, const Vector4& v) {
             os << "Vector4(x=" << v.x << ", y=" << v.y << ", z=" << v.z << ", w=" << v.w << ")";
             return os;
