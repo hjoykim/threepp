@@ -231,7 +231,13 @@ Color& Color::setScalar(float scalar) {
 
     return *this;
 }
+Color& Color::setRGB(float r, float g, float b){
+    this->r = r;
+    this->g = g;
+    this->b = b;
 
+    return *this;
+}
 Color& Color::setHex(unsigned int hex) {
 
     this->r = static_cast<float>(hex >> 16 & 255) / 255.f;
@@ -240,14 +246,8 @@ Color& Color::setHex(unsigned int hex) {
 
     return *this;
 }
-
-Color& Color::setRGB(float r, float g, float b) {
-
-    this->r = r;
-    this->g = g;
-    this->b = b;
-
-    return *this;
+unsigned int Color::toHex() {
+    return static_cast<int>(this->r * 255) << 16 ^ static_cast<int>(this->g * 255) << 8 ^ static_cast<int>(this->b * 255) << 0;
 }
 
 Color& Color::setHSL(float h, float s, float l) {

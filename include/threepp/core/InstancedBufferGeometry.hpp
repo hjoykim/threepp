@@ -19,7 +19,7 @@ namespace threepp {
     class InstancedBufferGeometry: public BufferGeometry {
     public:
         std::vector<InstancedGroups> groups;
-        std::optional<int> maxInstanceCount;
+        std::optional<int> maxInstanceCount = std::nullopt;
         int instanceCount{std::numeric_limits<int>::max()};
 
         InstancedBufferGeometry();
@@ -31,6 +31,10 @@ namespace threepp {
         InstancedBufferGeometry& copy(const InstancedBufferGeometry& source);
 
         void addGroup(int start, int count, int instances);
+
+        static std::shared_ptr<InstancedBufferGeometry> create() {
+            return std::make_shared<InstancedBufferGeometry>();
+        }
     };
 
 }// namespace threepp

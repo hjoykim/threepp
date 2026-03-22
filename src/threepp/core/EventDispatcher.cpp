@@ -30,14 +30,14 @@ void EventDispatcher::removeEventListener(const std::string& type, const EventLi
         listenerArray.erase(find);
     }
 }
-
+#include "threepp/materials/Material.hpp"
+#include <iostream>
 void EventDispatcher::dispatchEvent(const std::string& type, void* target) {
 
     if (listeners_.contains(type)) {
 
-        Event e{type, target};
-
-        auto listenersOfType = listeners_.at(type);//copy
+        Event e{type, target};       
+        auto listenersOfType = listeners_.at(type);//copy        
         for (auto l : listenersOfType) {
             if (l) {
                 l->onEvent(e);

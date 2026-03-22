@@ -4,7 +4,19 @@
 #define THREEPP_VECTOR2_HPP
 
 #include <ostream>
+/* Save and undefine possible `min`/`max` macros so member functions named
+   `min` / `max` are not interpreted as macro invocations. */
+#if defined(_MSC_VER) || defined(__GNUC__) || defined(__clang__)
+#pragma push_macro("min")
+#pragma push_macro("max")
+#endif
 
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
 namespace threepp {
 
     class Matrix3;

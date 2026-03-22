@@ -12,7 +12,7 @@
 
 #include <optional>
 #include <unordered_map>
-
+#include <any>
 namespace threepp {
 
     class BufferGeometry: public EventDispatcher {
@@ -32,7 +32,7 @@ namespace threepp {
         std::optional<Sphere> boundingSphere;
 
         DrawRange drawRange{0, std::numeric_limits<int>::max() / 2};
-
+        std::unordered_map<std::string, std::any> userData;
         BufferGeometry();
 
         BufferGeometry(const BufferGeometry&) = delete;

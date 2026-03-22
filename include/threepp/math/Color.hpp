@@ -35,6 +35,8 @@ namespace threepp {
 
         Color& setHex(unsigned int hex);
 
+        unsigned int toHex();
+
         Color& copy(const Color& color);
 
         Color& add(const Color& color);
