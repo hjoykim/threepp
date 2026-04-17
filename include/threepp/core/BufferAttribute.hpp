@@ -370,7 +370,7 @@ namespace threepp {
 
                 const auto x = getX(i);
                 const auto y = getY(i);
-                const auto z = getZ(i);
+                const auto z = (this->itemSize_ >= 3) ? getZ(i) : T{};
 
                 if (x < minX) minX = x;
                 if (y < minY) minY = y;

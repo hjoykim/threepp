@@ -45,6 +45,10 @@ namespace threepp {
 
         virtual void setSize(const std::pair<int, int>& size) = 0;
 
+        virtual void getViewport(Vector4& target) const = 0;
+
+        virtual void setViewport(const Vector4& v) = 0;
+        virtual void setViewport(int x, int y, int width, int height) = 0;
         virtual void clear(bool color = true, bool depth = true, bool stencil = true) = 0;
         virtual void dispose()=0;
 
