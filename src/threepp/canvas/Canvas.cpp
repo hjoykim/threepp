@@ -262,8 +262,21 @@ struct Canvas::Impl {
 
     void animate(const std::function<void()>& f) {
 #if EMSCRIPTEN
-        FunctionWrapper wrapper(f);
-        emscripten_set_main_loop_arg(&emscriptenLoop, &wrapper, 0, true);
+        // NOTE: wrapper must outlive this function call because
+        // emscripten_set_main_loop_arg only *registers* the callback
+        // and returns; the loop runs asynchronously from the browser.
+        // Using a stack-local wrapper + simulate_infinite_loop=true
+        // leaks an 'unwind' exception to JS and leaves a dangling ptr.
+        static FunctionWrapper* wrapper = nullptr;
+        if (wrapper) { delete wrapper; wrapper = nullptr; }
+        wrapper = new FunctionWrapper(f);
+        // fps=0  -> use requestAnimationFrame
+        // simulate_infinite_loop=false -> do NOT throw 'unwind', do NOT
+        // tear down main(); just schedule the loop and return.
+        emscripten_set_main_loop_arg(&emscriptenLoop, wrapper, 0, false);
+        // Keep the runtime alive even though main() returns, so the
+        // Embind bindings (loadModel, resize, ...) stay callable.
+        EM_ASM({ Module.noExitRuntime = true; });
 #else
         while (animateOnce(f)) {}
 #endif
